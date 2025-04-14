@@ -74,6 +74,41 @@ const Login = () => {
         }
 
     }
+
+    const handleReset = async (e) => {
+        const MySwal = withReactContent(Swal)
+
+        const { value: formValues } =  await MySwal.fire({
+            title: "Recuperar senha",
+            text: "Informe a nova senha",
+            html: `
+                <div class="swal2-input-group">
+              <label for="swal-input1">Password</label>
+              <input type="password" id="swal-input1" class="swal2-input" placeholder="Enter new password" required="true">
+                </div>
+                <div class="swal2-input-group">
+              <label for="swal-input2">Confirm Password</label>
+              <input type="password" id="swal-input2" class="swal2-input" placeholder="Confirm password" required="true">
+                </div>
+            `,
+            focusConfirm: false,
+            preConfirm: () => {
+                const formValues = [
+                    document.getElementById("swal-input1").value,
+                    document.getElementById("swal-input2").value
+                ];
+            }
+        });
+        if (formValues) {
+            Swal.fire(JSON.stringify(document.getElementById("swal-input1").value), JSON.stringify(document.getElementById("swal-input2").value), "success")
+            .then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire("Success", "You have registered successfully!", "success");
+                }
+            });
+        }
+    }
+
     return (
         <div className="container">
             <form onSubmit={handleSubmit}>
@@ -89,7 +124,7 @@ const Login = () => {
                     <label>
                         <Button type="checkbox" required={false} /> Lembrar-me
                     </label>
-                    <a href="#">Esqueceu a senha?</a>
+                    <a href="#" onClick={handleReset}>Esqueceu a senha?</a>
                 </div>
 
                 <button>Entrar</button>
