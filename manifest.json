@@ -17,8 +17,9 @@
     ],
     "orientation":"any",
     "display":"fullscreen",
-    "dir":"index.html",
+    "dir":"ltr",
     "lang":"pt-BR",
     "name":"Tela de Login",
     "short_name":"Login"
+
 }
